@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+      .main{
+        border: 5px solid rgb(255, 213, 0);
+        box-shadow: 0px 0px 10px  rgb(255, 153, 0);
+      }
+      
+    </style>
+    <script>
+       var movies=["Select Movies","Avtar","Pathan","Shahzada"]
+        var cinema1=["Select Cinema","Kapoor DD","GV Banjara","INOX Cinema"]
+        var cinema2=["Select Cinema","INOX Cinema","PVR Cinema","IMAX Cinema"]
+        var dates=["Select Date","Today 8 March","Tomorrow 9 March","10 March","11 March"]
+        var times1=["Select Time","10.00 AM","12.30 PM","3.30 PM","6.30 PM"]
+        var times2=["Select Time","9.30 AM","12.30 PM","3.00 PM","6.30 PM"]
+        var times3=["Select Time","12.30 PM","3.30 PM","6.00 PM","9.30 PM"]
+        var times4=["Select Time","11.30 AM","3.30 PM","6.30 AM","9.30 PM"]
+        var seats=["Select Seats","1","2","3","4","5","6"]
+         var items=[]
+      function selectMovies(){
+        for(var movie of movies){
+          var option=document.createElement("option");
+          option.value=movie;
+          option.text=movie;
+          document.getElementById("movies").appendChild(option)
+        }
+      }
+      function selectCinema(){
+        document.getElementById("cinema").innerHTML=""
+        for(var cinema of items){
+          var option=document.createElement("option");
+          option.value=cinema;
+          option.text=cinema;
+          document.getElementById("cinema").appendChild(option)
+        }
+      }
+      function selectDate(){
+        document.getElementById("date").innerHTML=""
+        for(var date of items){
+          var option=document.createElement("option");
+          option.value=date;
+          option.text=date;
+          document.getElementById("date").appendChild(option)
+        }
+      }
+      function selectTime(){
+        document.getElementById("time").innerHTML=""
+        for(var time of items){
+          var option=document.createElement("option");
+          option.value=time;
+          option.text=time;
+          document.getElementById("time").appendChild(option)
+        }
+      }
+      function selectSeats(){
+        document.getElementById("seats").innerHTML="";
+        for(var seat of items){
+          var option=document.createElement("option");
+          option.value=seat;
+          option.text=seat;
+          document.getElementById("seats").appendChild(option)
+        }
+      }
+      function bodyload(){
+        selectMovies()
+      }
+      function ChangeMovies(){
+        var movie=document.getElementById("movies").value;
+
+        switch(movie){
+          case "Avtar":
+          items=cinema1;
+          selectCinema();
+          break;
+          case "Pathan":
+          items=cinema2;
+          selectCinema()
+          break;
+          case "Shahzada":
+          items=cinema2;
+          selectCinema()
+          break;
+          default:
+          items=["Please Enter Movie Name"]
+          selectCinema()
+      }
+    }
+    function ChangeCinema(){
+        var cinema=document.getElementById("cinema").value;
+
+        switch(cinema){
+          case "Kapoor DD":
+            items=dates;
+          selectDate();
+          break;
+          case "INOX Cinema":
+          items=dates;
+          selectDate()
+          break;
+          case "GV Banjara":
+          items=dates;
+          selectDate()
+          break;
+          case "IMAX Cinema":
+          items=dates;
+          selectDate()
+          break;
+          case "PVR Cinema":
+          items=dates;
+          selectDate()
+          break;
+          default:
+          items=["Please Select Cinema"]
+          selectDates()
+
+        }
+      }
+      function ChangeDate(){
+        var date=document.getElementById("date").value;
+
+        switch(date){
+          case "Today 8 March":
+            items=times1;
+          selectTime();
+          break;
+          case "Tomorrow 9 March":
+            items=times2;
+          selectTime();
+          break;
+          case "10 March":
+            items=times3;
+          selectTime();
+          break;
+          case "11 March":
+          items=times4;
+          selectTime();
+          break;
+          default:
+          items=["Please Select Date"]
+          selectTime()
+
+        }
+      }
+      function ChangeTime(){
+        var time=document.getElementById("time").value;
+
+        switch(time){
+          case "Select Time":
+          items=["Please Select Times"]
+          selectSeats()
+          break;
+          default:
+          items=seats
+          selectSeats()
+
+        }
+      }
+      function ChangeSeat(){
+       var seats= document.getElementById("seats").value;
+        var btn= document.getElementById("btn");
+        switch(seats){
+          case "Select Seats":
+            btn.disabled=true;
+            break;
+            default:
+            btn.disabled=false;
+        }
+        
+      }
+      function BookTicket(){
+        document.getElementById("lblmovie").innerHTML=document.getElementById("movies").value;
+        document.getElementById("lblcinema").innerHTML =document.getElementById("cinema").value;
+        document.getElementById("lbldate").innerHTML=document.getElementById("date").value;
+        document.getElementById("lbltime").innerHTML=document.getElementById("time").value;
+        document.getElementById("lblseats").innerHTML=document.getElementById("seats").value;
+
+        var pic=document.getElementById("pic");
+        var movies=document.getElementById("movies").value
+
+        switch(movies){
+          case "Avtar":
+          pic.src="public/img/avtar.jpg"
+          break;
+          case "Pathan":
+          pic.src="public/img/pathan2.webp"
+          break;
+          case "Shahzada":
+          pic.src="public/img/Shehzada.jpg"
+          break;
+          default:
+            document.querySelector("button").disabled=true
+      }
+      }
+    </script>
+</head>
+<body class="container-fluid"onload="bodyload()">
+
+   <div class="d-flex justify-content-between p-3 bg-dark main">
+      <div>
+        <select id="movies"class="form-select w-100"onchange="ChangeMovies()"></select>
+      </div>
+      <div>
+        <select id="cinema"class="form-select "onchange="ChangeCinema()"></select>
+      </div>
+      <div>
+        <select id="date"class="form-select"onchange="ChangeDate()"></select>
+      </div>
+      <div>
+        <select id="time"class="form-select"onchange="ChangeTime()"></select>
+      </div>
+      <div>
+        <select id="seats"class="form-select"onchange="ChangeSeat()"></select>
+      </div>
+      <div>
+        <button class="btn btn-danger"disabled onclick="BookTicket()"data-bs-toggle="modal"data-bs-target="#summary"id="btn">Book</button>
+        <div class="modal"id="summary">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Booking Summary</h3>
+                <button class="btn-close"data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <img id="pic"width="200px"height="180px">
+                <dl class="row mt-4">
+                  <dt class="col-6">Movie Name</dt>
+                  <dd id="lblmovie"class="col-6"></dd>
+                  <dt class="col-6">Cinema Name</dt>
+                  <dd id="lblcinema"class="col-6"></dd>
+                  <dt class="col-6">Date</dt>
+                  <dd id="lbldate"class="col-6"></dd>
+                  <dt class="col-6">Time</dt>
+                  <dd id="lbltime"class="col-6"></dd>
+                  <dt class="col-6">Seats</dt>
+                  <dd id="lblseats"class="col-6"></dd>
+                </dl>
+              </div>
+              <div class="modal-footer">
+                <button onclick="window.print()"class="btn btn-success">Print Ticket</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+   <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
